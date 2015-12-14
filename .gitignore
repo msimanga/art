@@ -1,0 +1,7 @@
+# Compare source #
+*.class
+*.exe
+*.java
+*.jar
+art.properties
+

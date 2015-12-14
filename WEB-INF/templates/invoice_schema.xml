@@ -1,0 +1,30 @@
+<Schema name="ChinookSchema">
+  <Cube name="Invoice" visible="true" cache="true" enabled="true">
+    <Table name="Invoice">
+    </Table>
+    <Dimension visible="true" highCardinality="false" name="BillingCountry">
+      <Hierarchy visible="true" hasAll="true" allMemberName="All Countries">
+        <Level name="Country" visible="true" column="BillingCountry" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="State" visible="true" column="BillingState" uniqueMembers="true" description="Billing State">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension visible="true" highCardinality="false" name="BillingCity">
+      <Hierarchy visible="true" hasAll="true" allMemberName="All Cities">
+        <Level name="City" visible="true" column="BillingCity" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension visible="true" name="Customer" foreignKey="CustomerId">
+            <Hierarchy hasAll="true" allMemberName="All Customers" primaryKey="CustomerId">
+                <Table name="Customer"/>
+                <Level name="CustomerCountry" column="Country" uniqueMembers="true"/>
+		<Level name="CustomerState" column="State" uniqueMembers="true"/>
+		<Level name="CustomerCity" column="City" uniqueMembers="true"/>
+            </Hierarchy>
+       </Dimension>
+    <Measure name="Total Amount" column="Total" formatString="Standard" aggregator="sum">
+    </Measure>
+  </Cube>
+</Schema>

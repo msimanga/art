@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<configuration scan="true" scanPeriod="1 minute">
+
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">		
+		<encoder>
+			<pattern>[%level] %date{dd MMM yyyy HH:mm:ss.SSS} | %logger - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- appender used to display logs from application interface. name must be CYCLIC as per ViewLogs.java -->
+	<appender name="CYCLIC" class="ch.qos.logback.core.read.CyclicBufferAppender">
+		<MaxSize>512</MaxSize>
+	</appender>
+
+
+	<logger name="org.quartz">
+		<level value="info" />
+	</logger>
+	
+	<logger name="art">
+		<level value="info" />
+	</logger>
+		
+	<logger name="mondrian.sql">
+		<level value="warn" />
+	</logger>
+
+	<logger name="mondrian.mdx">
+		<level value="warn" />
+	</logger>
+
+	<logger name="mondrian.rolap.agg">
+		<level value="warn" />
+	</logger>
+
+	<logger name="mondrian.gui">
+		<level value="warn"/>
+	</logger>
+
+	<logger name="com.tonbeller">
+		<level value="warn"/>
+	</logger>
+
+	
+
+	<root>
+		<level value="warn" />
+		<appender-ref ref="stdout" />
+		<appender-ref ref="CYCLIC" />
+	</root>
+
+</configuration>

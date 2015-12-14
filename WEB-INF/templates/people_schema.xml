@@ -1,0 +1,35 @@
+<Schema name="PeopleSchema">
+  <Cube name="People" visible="true" cache="true" enabled="true">
+    <Table name="persons_quicklookup"> </Table>
+    <Dimension visible="true" highCardinality="false" name="Citizenship">
+      <Hierarchy visible="true" hasAll="true" allMemberName="All Citizenship">
+        <Level name="Citizenship" visible="true" column="citizenship_enum" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension visible="true" highCardinality="false" name="Party">
+      <Hierarchy visible="true" hasAll="true" allMemberName="All Parties">
+        <Level name="Party" visible="true" column="party_shortname_text" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension visible="true" highCardinality="false" name="Race">
+      <Hierarchy visible="true" hasAll="true" allMemberName="All Races">
+        <Level name="Race" visible="true" column="race_enum" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+ 
+    <Dimension visible="true" name="IEC Ward" foreignKey="iec_ward_id">
+            <Hierarchy hasAll="true" allMemberName="All IEC Wards" primaryKey="wardid">
+                <Table name="wardinfo" schema="sally"/>
+                <Level name="IEC Province" column="prov_name" uniqueMembers="true"/>
+		<Level name="IEC Municipality" column="muni_shortname" uniqueMembers="true"/>
+		<Level name="IEC Region" column="region_name" uniqueMembers="true"/>
+            </Hierarchy>
+       </Dimension>
+    
+    <Measure name="Count People" column="person_id" formatString="Standard" aggregator="count">
+    </Measure>
+  </Cube>
+</Schema>
